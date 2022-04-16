@@ -1,4 +1,23 @@
 ﻿.hero-overlay {
-/*    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));*/
+/*
+    Gives a vignette feel where the image is darkened around the borders
+    Makes the test more visible
+*/
     box-shadow: inset 0px 0px 150px black;
+}
+
+.hero-image {
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+
+/* Zoom-n-rotate Container */
+.img-hover-zoom--zoom-n-rotate img {
+    transition: transform .3s ease-in-out;
+}
+
+/* The Transformation */
+.img-hover-zoom--zoom-n-rotate:hover img {
+    transform: scale(1.2);
 }

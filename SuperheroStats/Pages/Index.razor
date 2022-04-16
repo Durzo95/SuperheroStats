@@ -4,13 +4,12 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Superhero Statistics</h1>
-<h4>One stop shop to view hero and villain statistics</h4>
-<button class="btn btn-primary" @onclick="GetHeroes">Get Heroes</button>
+<h1>Super Hero Stats</h1>
+<button class="btn btn-primary mb-3" @onclick="GetHeroes">Get 20 Random Heroes</button>
 
 
 
-<div class="row row-cols-1 row-cols-md-4 g-4">
+<div class="row row-cols-1 row-cols-md-4 g-4 hero-card-container">
 	@if (heroes != null)
 	{
 		@foreach (var hero in heroes)
