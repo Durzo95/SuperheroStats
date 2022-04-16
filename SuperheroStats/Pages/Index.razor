@@ -1,14 +1,35 @@
 ﻿@page "/"
+@using SuperheroStats.Services
+@using SuperheroStats.Data
 
 <PageTitle>Index</PageTitle>
 
 <h1>Superhero Statistics</h1>
 <h4>One stop shop to view hero and villain statistics</h4>
+<button class="btn btn-primary" @onclick="GetHeroes">Get Heroes</button>
+
 
 
 <div class="row row-cols-1 row-cols-md-4 g-4">
-	<HeroCards/>
-	<HeroCards/>
-	<HeroCards/>
-	<HeroCards/>
+	@if (heroes != null)
+	{
+		@foreach (var hero in heroes)
+		{
+			<HeroCards hero="@hero"/>
+		}
+	}
+
 </div>
+
+@code
+{
+	[Inject]
+	public IHeroService HeroService { get; set; }
+	private IEnumerable<Hero> heroes { get; set; }
+
+	private async Task GetHeroes()
+	{
+		heroes = null;
+		heroes = (await HeroService.GetHeros()).ToList();
+	}
+}
