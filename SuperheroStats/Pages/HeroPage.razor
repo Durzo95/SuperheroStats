@@ -1,0 +1,29 @@
+﻿@page "/hero/{heroName}"
+@using SuperheroStats.Services
+@using SuperheroStats.Data
+@if (hero != null)
+{
+	<h3>@hero.name</h3>
+}
+
+
+
+@code {
+	[Parameter]
+	public string heroName { get; set; }
+
+	[Inject]
+	public IHeroService HeroService { get; set; }
+	private Hero hero { get; set; }
+
+	protected override async void OnInitialized()
+	{
+		GetHeroDetails(heroName);
+	}
+
+	private async Task GetHeroDetails(string heroName)
+	{
+		hero = (await HeroService.GetHero(heroName));
+	}
+
+}
