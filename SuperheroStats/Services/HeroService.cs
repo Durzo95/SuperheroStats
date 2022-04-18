@@ -19,5 +19,11 @@ namespace SuperheroStats.Services
         {
             return await _httpClient.GetFromJsonAsync<Hero[]>("heroes");
         }
+
+        public async Task<Hero> GetHero(string name)
+        {
+            return await _httpClient.GetFromJsonAsync<Hero>($"?hero={name}");
+
+        }
     }
 }
