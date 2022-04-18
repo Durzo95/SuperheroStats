@@ -15,7 +15,7 @@ namespace SuperheroStats.Services
             _httpClient.DefaultRequestHeaders.Add("X-RapidAPI-Host", _config["HeroApiHost"]);
             _httpClient.DefaultRequestHeaders.Add("X-RapidAPI-Key", _config["HeroApiKey"]);
         }
-        public async Task<IEnumerable<Hero>> GetHeros()
+        public async Task<IEnumerable<Hero>> GetHeroes()
         {
             return await _httpClient.GetFromJsonAsync<Hero[]>("heroes");
         }
