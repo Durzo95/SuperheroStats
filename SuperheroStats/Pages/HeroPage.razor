@@ -1,28 +1,47 @@
 ﻿@page "/hero/{heroName}"
 @using SuperheroStats.Services
 @using SuperheroStats.Data
-@if (hero != null)
+@using System.Text.Json
+@if (hero == null)
 {
-	<h3>@hero.name</h3>
+	<h1>Loading Data...</h1>
+}
+else
+{
+	<h1>@hero.name</h1>
+	<div class="col">
+		<a href="/hero/@hero.name">
+			<div class="card text-white hero-image img-hover-zoom--zoom-n-rotate">
+				<img src="@hero.images.lg" class="card-img-top" alt="@hero.name"/>
+				<div class="card-img-overlay hero-overlay">
+					<h3 class="card-title fw-bold">@hero.name</h3>
+					<h5 class="card-text">@hero.biography.fullName</h5>
+				</div>
+			</div>
+		</a>
+	</div>
 }
 
 
 
 @code {
-	[Parameter]
-	public string heroName { get; set; }
+    [Parameter]
+    public string heroName { get; set; }
 
-	[Inject]
-	public IHeroService HeroService { get; set; }
-	private Hero hero { get; set; }
+    [Inject]
+    public IHeroService HeroService { get; set; }
+    
+	static string jsonData = System.IO.File.ReadAllText("wwwroot/sample-data/hero-sample.json");
 
-	protected override async void OnInitialized()
-	{
-		GetHeroDetails(heroName);
-	}
+	private Hero hero { get; set; } = JsonSerializer.Deserialize<Hero>(jsonData);
+	
 
-	private async Task GetHeroDetails(string heroName)
-	{
+
+	//protected override async Task OnInitializedAsync() => await GetHeroDetails(heroName);
+
+
+    private async Task GetHeroDetails(string heroName)
+    {
 		hero = (await HeroService.GetHero(heroName));
 	}
 
