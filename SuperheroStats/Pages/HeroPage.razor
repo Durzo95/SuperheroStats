@@ -2,46 +2,51 @@
 @using SuperheroStats.Services
 @using SuperheroStats.Data
 @using System.Text.Json
-@if (hero == null)
-{
+
+
+
+@*@if (hero == null)
+	{
 	<h1>Loading Data...</h1>
-}
-else
-{
-	<h1>@hero.name</h1>
-	<div class="col">
-		<a href="/hero/@hero.name">
-			<div class="card text-white hero-image img-hover-zoom--zoom-n-rotate">
-				<img src="@hero.images.lg" class="card-img-top" alt="@hero.name"/>
-				<div class="card-img-overlay hero-overlay">
-					<h3 class="card-title fw-bold">@hero.name</h3>
-					<h5 class="card-text">@hero.biography.fullName</h5>
+	}*@
+<div class="container">
+	<div class="row">
+		<div class="col-3">
+			<div class="row-fuid" id="hero-avatar-container">
+				@*Image by default is displayed as inline-block, 
+				you need to display it as block in order to center it with .mx-auto. 
+				This can be done with built-in .d-block*@
+				<img src="@hero.images.lg" class="mx-auto d-block" id="hero-avatar" alt="@hero.name"/>
+				<div class="row">
+					Test
 				</div>
 			</div>
-		</a>
+			<div class="col-7"></div>
+			<div class="col-3"></div>
+		</div>
 	</div>
-}
+</div>
 
 
 
 @code {
-    [Parameter]
-    public string heroName { get; set; }
+	[Parameter]
+	public string heroName { get; set; }
 
-    [Inject]
-    public IHeroService HeroService { get; set; }
-    
+	[Inject]
+	public IHeroService HeroService { get; set; }
+
 	static string jsonData = System.IO.File.ReadAllText("wwwroot/sample-data/hero-sample.json");
 
 	private Hero hero { get; set; } = JsonSerializer.Deserialize<Hero>(jsonData);
-	
+
 
 
 	//protected override async Task OnInitializedAsync() => await GetHeroDetails(heroName);
 
 
-    private async Task GetHeroDetails(string heroName)
-    {
+	private async Task GetHeroDetails(string heroName)
+	{
 		hero = (await HeroService.GetHero(heroName));
 	}
 

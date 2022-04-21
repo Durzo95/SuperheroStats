@@ -1,0 +1,32 @@
+﻿/*.circular-portrait {*/
+    /*    position: relative;*/
+    /*width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+    align-content: center;
+    justify-content: center;
+}*/
+
+/*.circular-portrait img {
+    width: 100%;
+    height: auto;
+    margin: 0;
+
+}
+*/
+
+/*#hero-avatar-container {
+    align-content: center;
+    justify-content: center;
+    position: center;
+    margin: 0 0 0 0;
+}*/
+
+#hero-avatar {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+
+}
