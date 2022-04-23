@@ -7,4 +7,8 @@
     <UserSecretsId>278869c9-ef2f-415a-9dc7-9894ba7be0f7</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\js\bootstrap\" />
+  </ItemGroup>
+
 </Project>
