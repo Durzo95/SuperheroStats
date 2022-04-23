@@ -2,6 +2,8 @@
 @using SuperheroStats.Services
 @using SuperheroStats.Data
 @using System.Text.Json
+@using System.Reflection
+@using System.Globalization
 
 
 
@@ -11,19 +13,74 @@
 	}*@
 <div class="container">
 	<div class="row">
-		<div class="col-3">
-			<div class="row-fuid" id="hero-avatar-container">
+		@*Character picture and name*@
+		<div class="col-lg-3">
+			<div class="row-fluid" id="hero-avatar-container">
 				@*Image by default is displayed as inline-block, 
 				you need to display it as block in order to center it with .mx-auto. 
 				This can be done with built-in .d-block*@
-				<img src="@hero.images.lg" class="mx-auto d-block" id="hero-avatar" alt="@hero.name"/>
-				<div class="row">
-					Test
+				<img src="@hero.images.lg" class="shadow-lg mb-3 mx-auto d-block" id="hero-avatar" alt="@hero.name"/>
+				<div class="row text-center">
+					<h1 class="fw-bold" id="hero-name">@hero.name</h1>
+					<h2>@hero.biography.fullName</h2>
 				</div>
 			</div>
-			<div class="col-7"></div>
-			<div class="col-3"></div>
 		</div>
+		@*Contains the main cards with stats and info*@
+		<div class="col-lg-7">
+			@*Card to show power statistics *@
+			<div class="card shadow">
+				<div class="card-header">
+					<h3>Power Stats</h3>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-4">
+							@*Iterating through the properties of the Hero Powerstats object
+							https://www.codegrepper.com/code-examples/csharp/c%23+iterate+over+object+properties
+							  Displaying the powerstat name*@
+							@foreach (PropertyInfo prop in hero.powerstats.GetType().GetProperties())
+							{
+								<h5 class="powerstat-name">@ti.ToTitleCase(prop.Name)</h5>
+							}
+						</div>
+						<div class="col-2">
+							@*displaying the powerstat value*@
+							@foreach (PropertyInfo prop in hero.powerstats.GetType().GetProperties())
+							{
+								<h5 class="powerstat-value">@prop.GetValue(hero.powerstats, null)</h5>
+							}
+						</div>
+						<div class="col-6">
+							@*Creating the progress bar based off the powerstat value*@
+							@foreach (PropertyInfo prop in hero.powerstats.GetType().GetProperties())
+							{
+								var progressValue = (int) prop.GetValue(hero.powerstats, null);
+								@*Change the color of the progress bar depending on the value of the powerstat*@
+								var progressColor = "";
+								if (progressValue <= 25)
+									progressColor = "bg-danger";
+								else if (progressValue <= 50)
+									progressColor = "bg-warning";
+								else if (progressValue <= 75)
+									progressColor = "bg-info";
+								else
+									progressColor = "bg-primary";
+
+								<div class="progress powerstat-progress mb-2">
+									<div class="progress-bar @progressColor" role="progressbar" style="width: @progressValue%" aria-valuenow="@progressValue" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		@*Contains misc info*@
+		<div class="col-lg-2">
+			
+		</div>
+
 	</div>
 </div>
 
@@ -40,7 +97,7 @@
 
 	private Hero hero { get; set; } = JsonSerializer.Deserialize<Hero>(jsonData);
 
-
+	TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
 
 	//protected override async Task OnInitializedAsync() => await GetHeroDetails(heroName);
 

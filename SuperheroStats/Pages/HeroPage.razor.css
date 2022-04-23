@@ -26,7 +26,23 @@
 #hero-avatar {
     object-fit: cover;
     border-radius: 50%;
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
 
+}
+
+#hero-name {
+    font-size: 3rem;
+}
+
+.powerstat-name {
+    height: 1.5rem;
+}
+
+.powerstat-value {
+    height: 1.5rem;
+}
+
+.powerstat-progress {
+    height: 1.5rem;
 }
