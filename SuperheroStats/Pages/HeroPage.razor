@@ -44,7 +44,7 @@
 								<h5 class="powerstat-name">@ti.ToTitleCase(prop.Name)</h5>
 							}
 						</div>
-						<div class="col-2">
+						<div class="col-2 text-end">
 							@*displaying the powerstat value*@
 							@foreach (PropertyInfo prop in hero.powerstats.GetType().GetProperties())
 							{
@@ -55,7 +55,7 @@
 							@*Creating the progress bar based off the powerstat value*@
 							@foreach (PropertyInfo prop in hero.powerstats.GetType().GetProperties())
 							{
-								var progressValue = (int) prop.GetValue(hero.powerstats, null);
+								var progressValue = (int) (prop.GetValue(hero.powerstats, null) ?? 0);
 								@*Change the color of the progress bar depending on the value of the powerstat*@
 								var progressColor = "";
 								if (progressValue <= 25)
@@ -96,6 +96,7 @@
 	static string jsonData = System.IO.File.ReadAllText("wwwroot/sample-data/hero-sample.json");
 
 	private Hero hero { get; set; } = JsonSerializer.Deserialize<Hero>(jsonData);
+
 
 	TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
 
