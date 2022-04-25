@@ -34,3 +34,8 @@
 .card {
     margin: 2rem 0rem;
 }
+
+.hero-pill {
+    font-size: 0.90rem;
+    margin: 0.25rem;
+}

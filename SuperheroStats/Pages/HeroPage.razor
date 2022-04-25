@@ -6,6 +6,7 @@
 @using System.Globalization
 @using System.Collections
 @using System.Text.RegularExpressions
+@using Microsoft.AspNetCore.Mvc.Diagnostics
 
 
 
@@ -15,6 +16,7 @@
 	}*@
 <div class="container">
 	<div class="row">
+
 		@*Left column with Character picture and name*@
 		<div class="col-lg-4">
 			<div class="row-fluid" id="hero-avatar-container">
@@ -27,7 +29,33 @@
 					<h2>@hero.biography.fullName</h2>
 				</div>
 			</div>
+			<br/>
+			<h4>Affiliations</h4>
+
+			@foreach (var aff in heroAffiliations)
+			{
+				if (colorIndex >= bootstrapColors.Count)
+				{
+					colorIndex = 0;
+				}
+				<span class="badge rounded-pill hero-pill @bootstrapColors[colorIndex]">@aff</span>
+				colorIndex++;
+			}
+
+			<br/>
+			<h4 class="mt-4">Relatives</h4>
+
+			@foreach (var rel in heroRelatives)
+			{
+				if (colorIndex >= bootstrapColors.Count)
+				{
+					colorIndex = 0;
+				}
+				<span class="badge rounded-pill hero-pill @bootstrapColors[colorIndex]">@rel</span>
+				colorIndex++;
+			}
 		</div>
+
 		@*Middle columns Contains the cards with stats and info*@
 		<div class="col-lg">
 			@*Card to show power statistics *@
@@ -70,7 +98,7 @@
 					</table>
 				</div>
 			</div>
-			
+			@*Card to show appearance data *@
 			<div class="card shadow">
 				<h3 class="card-header fw-bold">Appearance</h3>
 				<div class="card-body">
@@ -89,7 +117,7 @@
 					</table>
 				</div>
 			</div>
-			
+			@*Card to show biography data *@
 			<div class="card shadow">
 				<h3 class="card-header fw-bold">Biography</h3>
 				<div class="card-body">
@@ -108,7 +136,7 @@
 					</table>
 				</div>
 			</div>
-
+			@*Card to show work data *@
 			<div class="card shadow">
 				<h3 class="card-header fw-bold">Work</h3>
 				<div class="card-body">
@@ -127,6 +155,7 @@
 					</table>
 				</div>
 			</div>
+
 		</div>
 		@*Right Column that contains Contains misc info*@
 		@*<div class="col-lg-2">
@@ -144,12 +173,23 @@
 	[Inject]
 	public IHeroService HeroService { get; set; }
 
+	readonly TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+	readonly Random random = new Random();
+
 	static readonly string jsonData = System.IO.File.ReadAllText("wwwroot/sample-data/hero-sample.json");
 
-	private Hero hero { get; set; } = JsonSerializer.Deserialize<Hero>(jsonData);
+	private static Hero hero { get; set; } = JsonSerializer.Deserialize<Hero>(jsonData);
 
+	private List<string> heroAffiliations = hero.connections.groupAffiliation.Split(", ").ToList();
+	private List<string> heroRelatives = hero.connections.relatives.Split(", ").ToList();
 
-	readonly TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+	private List<string> bootstrapColors = new List<string>{"bg-primary", "bg-danger", 
+															"bg-warning text-dark", "bg-info text-dark"};
+
+	// The color index used to loop through the bootstrap colors when filling out the pills on the page
+	// It just looked bad when using random colors most of the time
+	// so sticking with looping through a good pallete instead
+	private int colorIndex = 0;
 
 	//protected override async Task OnInitializedAsync() => await GetHeroDetails(heroName);
 
