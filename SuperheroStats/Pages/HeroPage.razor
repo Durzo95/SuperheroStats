@@ -127,21 +127,11 @@
 					</table>
 				</div>
 			</div>
-
-			@*Card template*@
-			<div class="card shadow">
-				<h3 class="card-header fw-bold">Appearance</h3>
-				<div class="card-body">
-					<h5 class="card-title">Special title treatment</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-				</div>
-			</div>
 		</div>
 		@*Right Column that contains Contains misc info*@
 		<div class="col-lg-2">
 			
 		</div>
-
 	</div>
 </div>
 
@@ -181,7 +171,8 @@
 		var valueListOfStrings = value as IList<string>;
 		return string.Join(", ", valueListOfStrings);
 	}
-
+	// Converts pascal case strings into space deliminated string
+	// Used for the type names in the classes when looping
 	public string ToSentenceCase(string str)
 	{
 		return Regex.Replace(str, "[a-z][A-Z]", m => $"{m.Value[0]} {char.ToLower(m.Value[1])}");
