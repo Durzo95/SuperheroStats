@@ -52,5 +52,8 @@
 #hero-powerstats-table > :not(caption) > * > * {
     padding: 0.25rem 0.5rem;
 
+}
 
+.card {
+    margin: 2rem 0rem;
 }
