@@ -4,6 +4,7 @@
 @using System.Text.Json
 @using System.Reflection
 @using System.Globalization
+@using System.Collections
 
 
 
@@ -74,31 +75,15 @@
 				<div class="card-body">
 					<table class="table table-hover">
 						<tbody>
-						<tr>
-							<th class="powerstat-name">Gender</th>
-							<td class="powerstat-value">@hero.appearance.gender</td>
-						</tr>
-						<tr>
-							<th scope="row" class="powerstat-name">Race</th>
-							<td>@hero.appearance.race</td>
-						</tr>
-						<tr>
-							<th scope="row" class="powerstat-name">Height</th>
-							<td colspan="2">@String.Join(", ", @hero.appearance.height)</td>
-						</tr>
-						<tr>
-							<th scope="row" class="powerstat-name">Weight</th>
-							<td colspan="2">@String.Join(", ", @hero.appearance.weight)</td>
-						</tr>
-						<tr>
-							<th scope="row" class="powerstat-name">Eye Color</th>
-							<td>@hero.appearance.eyeColor</td>
-						</tr>
-						<tr>
-							<th scope="row" class="powerstat-name">Hair Color</th>
-							<td>@hero.appearance.hairColor</td>
-						</tr>
-
+						@foreach (PropertyInfo prop in hero.appearance.GetType().GetProperties())
+						{
+							var propValue = DeliminateStringIfList(prop.GetValue(hero.appearance, null));
+							var propName = ti.ToTitleCase(prop.Name);
+							<tr>
+								<th class="powerstat-name">@propName</th>
+								<td class="powerstat-value">@propValue</td>
+							</tr>
+						}
 						</tbody>
 					</table>
 				</div>
@@ -143,6 +128,19 @@
 	private async Task GetHeroDetails(string heroName)
 	{
 		hero = (await HeroService.GetHero(heroName));
+	}
+
+	// This is for values in the Hero API that have both lists and strings
+	// For example, under Hero.Appearance there are some values that are strings and others are lists
+	// This function is needed in order to handle the list values
+	// This allows us to loop through the values in the razor page without writing if statements in each one to check for type
+	private object DeliminateStringIfList(object value)
+	{
+		// If value is not the Ilist string value type then just return the string value
+		if (value is not IList || !value.GetType().IsGenericType) return value;
+		// Convert object to List<string> in order to use the string.Join method
+		var valueListOfStrings = value as IList<string>;
+		return string.Join(", ", valueListOfStrings);
 	}
 
 }
