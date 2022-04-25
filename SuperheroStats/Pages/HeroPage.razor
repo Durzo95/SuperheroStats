@@ -54,9 +54,8 @@
 							else
 								progressColor = "bg-primary";
 							<tr>
-								<th class="powerstat-name">@propName</th>
+								<th scope="row" class="powerstat-name">@propName</th>
 								<td class="powerstat-value text-end">@propValue</td>
-
 								<td class="powerstat-value h5 w-50">
 									<div class="progress powerstat-progress mb-2">
 										<div class="progress-bar @progressColor" role="progressbar" style="width: @propValue%" aria-valuenow="@propValue" aria-valuemin="0" aria-valuemax="100"></div>
