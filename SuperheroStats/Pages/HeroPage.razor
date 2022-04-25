@@ -99,6 +99,7 @@
 				</div>
 			</div>
 			@*Card to show appearance data *@
+
 			<div class="card shadow">
 				<h3 class="card-header fw-bold">Appearance</h3>
 				<div class="card-body">
@@ -186,8 +187,8 @@
 	}
 	//private static Hero hero { get; set; }
 
-	private readonly List<string> heroAffiliations = hero.connections.groupAffiliation.Split(", ").ToList();
-	private readonly List<string> heroRelatives = hero.connections.relatives.Split(", ").ToList();
+	private List<string> heroAffiliations = hero.connections.groupAffiliation.Split(", ").ToList();
+	private List<string> heroRelatives = hero.connections.relatives.Split(", ").ToList();
 
 	private readonly List<string> bootstrapColors = new List<string>{"bg-primary", "bg-danger", 
 															"bg-warning text-dark", "bg-info text-dark"};
