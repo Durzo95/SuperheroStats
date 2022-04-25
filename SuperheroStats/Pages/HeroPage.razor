@@ -10,10 +10,10 @@
 
 
 
-@*@if (hero == null)
+@if (hero == null)
 	{
 	<h1>Loading Data...</h1>
-	}*@
+	}
 <div class="container">
 	<div class="row">
 
@@ -43,7 +43,7 @@
 			}
 
 			<br/>
-			<h4 class="mt-4">Relatives</h4>
+			@*<h4 class="mt-4">Relatives</h4>
 
 			@foreach (var rel in heroRelatives)
 			{
@@ -53,7 +53,7 @@
 				}
 				<span class="badge rounded-pill hero-pill @bootstrapColors[colorIndex]">@rel</span>
 				colorIndex++;
-			}
+			}*@
 		</div>
 
 		@*Middle columns Contains the cards with stats and info*@
@@ -171,19 +171,25 @@
 	public string heroName { get; set; }
 
 	[Inject]
-	public IHeroService HeroService { get; set; }
+	public IHeroService? HeroService { get; set; }
 
 	readonly TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
 	readonly Random random = new Random();
 
 	static readonly string jsonData = System.IO.File.ReadAllText("wwwroot/sample-data/hero-sample.json");
 
-	private static Hero hero { get; set; } = JsonSerializer.Deserialize<Hero>(jsonData);
+	private static Hero? hero = JsonSerializer.Deserialize<Hero>(jsonData);
 
-	private List<string> heroAffiliations = hero.connections.groupAffiliation.Split(", ").ToList();
-	private List<string> heroRelatives = hero.connections.relatives.Split(", ").ToList();
+	protected override async Task OnInitializedAsync()
+	{
+		hero = await HeroService.GetHero(heroName);
+	}
+	//private static Hero hero { get; set; }
 
-	private List<string> bootstrapColors = new List<string>{"bg-primary", "bg-danger", 
+	private readonly List<string> heroAffiliations = hero.connections.groupAffiliation.Split(", ").ToList();
+	private readonly List<string> heroRelatives = hero.connections.relatives.Split(", ").ToList();
+
+	private readonly List<string> bootstrapColors = new List<string>{"bg-primary", "bg-danger", 
 															"bg-warning text-dark", "bg-info text-dark"};
 
 	// The color index used to loop through the bootstrap colors when filling out the pills on the page
@@ -206,10 +212,10 @@
 	private object DeliminateStringIfList(object value)
 	{
 		// If value is not the Ilist string value type then just return the string value
-		if (value is not IList || !value.GetType().IsGenericType) return value;
+		if (value is not IList || !value.GetType().IsGenericType) 
+			return value;
 		// Convert object to List<string> in order to use the string.Join method
-		var valueListOfStrings = value as IList<string>;
-		return string.Join(", ", valueListOfStrings);
+		return value is IList<string> valueListOfStrings ? string.Join(", ", valueListOfStrings) : "-";
 	}
 	// Converts pascal case strings into space deliminated string
 	// Used for the type names in the classes when looping
