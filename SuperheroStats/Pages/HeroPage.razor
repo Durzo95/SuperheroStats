@@ -5,6 +5,7 @@
 @using System.Reflection
 @using System.Globalization
 @using System.Collections
+@using System.Text.RegularExpressions
 
 
 
@@ -88,6 +89,25 @@
 					</table>
 				</div>
 			</div>
+			
+			<div class="card shadow mb-5">
+				<h3 class="card-header fw-bold">Biography</h3>
+				<div class="card-body">
+					<table class="table table-hover">
+						<tbody>
+						@foreach (PropertyInfo prop in hero.biography.GetType().GetProperties())
+						{
+							var propValue = DeliminateStringIfList(prop.GetValue(hero.biography, null));
+							var propName = ti.ToTitleCase(ToSentenceCase(prop.Name));
+							<tr>
+								<th class="powerstat-name">@propName</th>
+								<td class="powerstat-value">@propValue</td>
+							</tr>
+						}
+						</tbody>
+					</table>
+				</div>
+			</div>
 
 			@*Card template*@
 			<div class="card shadow mb-5">
@@ -141,6 +161,11 @@
 		// Convert object to List<string> in order to use the string.Join method
 		var valueListOfStrings = value as IList<string>;
 		return string.Join(", ", valueListOfStrings);
+	}
+
+	public string ToSentenceCase(string str)
+	{
+		return Regex.Replace(str, "[a-z][A-Z]", m => $"{m.Value[0]} {char.ToLower(m.Value[1])}");
 	}
 
 }
