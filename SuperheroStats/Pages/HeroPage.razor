@@ -79,7 +79,7 @@
 						@foreach (PropertyInfo prop in hero.appearance.GetType().GetProperties())
 						{
 							var propValue = DeliminateStringIfList(prop.GetValue(hero.appearance, null));
-							var propName = ti.ToTitleCase(prop.Name);
+							var propName = ti.ToTitleCase(ToSentenceCase(prop.Name));
 							<tr>
 								<th class="powerstat-name">@propName</th>
 								<td class="powerstat-value">@propValue</td>
@@ -98,6 +98,25 @@
 						@foreach (PropertyInfo prop in hero.biography.GetType().GetProperties())
 						{
 							var propValue = DeliminateStringIfList(prop.GetValue(hero.biography, null));
+							var propName = ti.ToTitleCase(ToSentenceCase(prop.Name));
+							<tr>
+								<th class="powerstat-name">@propName</th>
+								<td class="powerstat-value">@propValue</td>
+							</tr>
+						}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="card shadow mb-5">
+				<h3 class="card-header fw-bold">Work</h3>
+				<div class="card-body">
+					<table class="table table-hover">
+						<tbody>
+						@foreach (PropertyInfo prop in hero.work.GetType().GetProperties())
+						{
+							var propValue = DeliminateStringIfList(prop.GetValue(hero.work, null));
 							var propName = ti.ToTitleCase(ToSentenceCase(prop.Name));
 							<tr>
 								<th class="powerstat-name">@propName</th>
