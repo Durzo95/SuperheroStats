@@ -16,7 +16,7 @@
 <div class="container">
 	<div class="row">
 		@*Left column with Character picture and name*@
-		<div class="col-lg-3">
+		<div class="col-lg-4">
 			<div class="row-fluid" id="hero-avatar-container">
 				@*Image by default is displayed as inline-block, 
 				you need to display it as block in order to center it with .mx-auto. 
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		@*Middle columns Contains the cards with stats and info*@
-		<div class="col-lg-7">
+		<div class="col-lg">
 			@*Card to show power statistics *@
 			<div class="card shadow">
 				<div class="card-header">
@@ -82,7 +82,7 @@
 							var propValue = DeliminateStringIfList(prop.GetValue(hero.appearance, null));
 							<tr>
 								<th class="powerstat-name">@propName</th>
-								<td class="powerstat-value">@propValue</td>
+								<td class="powerstat-value  w-50">@propValue</td>
 							</tr>
 						}
 						</tbody>
@@ -101,7 +101,7 @@
 							var propValue = DeliminateStringIfList(prop.GetValue(hero.biography, null));
 							<tr>
 								<th class="powerstat-name">@propName</th>
-								<td class="powerstat-value">@propValue</td>
+								<td class="powerstat-value  w-50">@propValue</td>
 							</tr>
 						}
 						</tbody>
@@ -129,9 +129,9 @@
 			</div>
 		</div>
 		@*Right Column that contains Contains misc info*@
-		<div class="col-lg-2">
+		@*<div class="col-lg-2">
 			
-		</div>
+		</div>*@
 	</div>
 </div>
 
