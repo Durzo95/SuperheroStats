@@ -13,7 +13,7 @@
 	}*@
 <div class="container">
 	<div class="row">
-		@*Character picture and name*@
+		@*Left column with Character picture and name*@
 		<div class="col-lg-3">
 			<div class="row-fluid" id="hero-avatar-container">
 				@*Image by default is displayed as inline-block, 
@@ -26,57 +26,127 @@
 				</div>
 			</div>
 		</div>
-		@*Contains the main cards with stats and info*@
+		@*Middle columns Contains the cards with stats and info*@
 		<div class="col-lg-7">
 			@*Card to show power statistics *@
-			<div class="card shadow">
+			<div class="card shadow mb-5">
 				<div class="card-header">
-					<h3>Power Stats</h3>
+					<h3 class="fw-bold">Power Stats</h3>
 				</div>
 				<div class="card-body">
-					<div class="row">
-						<div class="col-4">
-							@*Iterating through the properties of the Hero Powerstats object
+					<table class="table table-borderless">
+						<tbody>
+						@*	Iterating through the properties of the Hero Powerstats object
 							https://www.codegrepper.com/code-examples/csharp/c%23+iterate+over+object+properties
-							  Displaying the powerstat name*@
-							@foreach (PropertyInfo prop in hero.powerstats.GetType().GetProperties())
-							{
-								<h5 class="powerstat-name">@ti.ToTitleCase(prop.Name)</h5>
-							}
-						</div>
-						<div class="col-2 text-end">
-							@*displaying the powerstat value*@
-							@foreach (PropertyInfo prop in hero.powerstats.GetType().GetProperties())
-							{
-								<h5 class="powerstat-value">@prop.GetValue(hero.powerstats, null)</h5>
-							}
-						</div>
-						<div class="col-6">
-							@*Creating the progress bar based off the powerstat value*@
-							@foreach (PropertyInfo prop in hero.powerstats.GetType().GetProperties())
-							{
-								var progressValue = (int) (prop.GetValue(hero.powerstats, null) ?? 0);
-								@*Change the color of the progress bar depending on the value of the powerstat*@
-								var progressColor = "";
-								if (progressValue <= 25)
-									progressColor = "bg-danger";
-								else if (progressValue <= 50)
-									progressColor = "bg-warning";
-								else if (progressValue <= 75)
-									progressColor = "bg-info";
-								else
-									progressColor = "bg-primary";
+							Displaying the powerstat name*@
+						@foreach (PropertyInfo prop in hero.powerstats.GetType().GetProperties())
+						{
+							var propValue = (int) (prop.GetValue(hero.powerstats, null) ?? 0);
+							var propName = ti.ToTitleCase(prop.Name);
+							@*Change the color of the progress bar depending on the value of the powerstat*@
+							var progressColor = "";
+							if (propValue <= 25)
+								progressColor = "bg-danger";
+							else if (propValue <= 50)
+								progressColor = "bg-warning";
+							else if (propValue <= 75)
+								progressColor = "bg-info";
+							else
+								progressColor = "bg-primary";
+							<tr>
+								<th class="powerstat-name">@propName</th>
+								<td class="powerstat-value text-end">@propValue</td>
 
+								<td class="powerstat-value h5 w-50">
+									<div class="progress powerstat-progress mb-2">
+										<div class="progress-bar @progressColor" role="progressbar" style="width: @propValue%" aria-valuenow="@propValue" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+								</td>
+							</tr>
+						}
+
+						@*
+						<tr>
+							<th class="powerstat-name">Intelligence</th>
+							<td class="powerstat-value h5 text-end">@hero.powerstats.intelligence</td>
+							<td class="powerstat-value h5 w-50">
 								<div class="progress powerstat-progress mb-2">
-									<div class="progress-bar @progressColor" role="progressbar" style="width: @progressValue%" aria-valuenow="@progressValue" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar bg-primary" role="progressbar" style="width: @hero.powerstats.intelligence%" aria-valuenow="@hero.powerstats.intelligence" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
-							}
-						</div>
-					</div>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row" class="powerstat-name">Race</th>
+							<td>@hero.appearance.race</td>
+
+						</tr>
+						<tr>
+							<th scope="row" class="powerstat-name">Height</th>
+							<td colspan="2">@String.Join(", ", @hero.appearance.height)</td>
+						</tr>
+						<tr>
+							<th scope="row" class="powerstat-name">Weight</th>
+							<td colspan="2">@String.Join(", ", @hero.appearance.weight)</td>
+						</tr>
+						<tr>
+							<th scope="row" class="powerstat-name">Eye Color</th>
+							<td>@hero.appearance.eyeColor</td>
+						</tr>
+						<tr>
+							<th scope="row" class="powerstat-name">Hair Color</th>
+							<td>@hero.appearance.hairColor</td>
+						</tr>
+*@
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div class="card shadow mb-5">
+				<h3 class="card-header fw-bold">Appearance</h3>
+				<div class="card-body">
+					<table class="table table-hover">
+						<tbody>
+						<tr>
+							<th class="powerstat-name">Gender</th>
+							<td class="powerstat-value h5">@hero.appearance.gender</td>
+						</tr>
+						<tr>
+							<th scope="row" class="powerstat-name">Race</th>
+							<td>@hero.appearance.race</td>
+						</tr>
+						<tr>
+							<th scope="row" class="powerstat-name">Height</th>
+							<td colspan="2">@String.Join(", ", @hero.appearance.height)</td>
+						</tr>
+						<tr>
+							<th scope="row" class="powerstat-name">Weight</th>
+							<td colspan="2">@String.Join(", ", @hero.appearance.weight)</td>
+						</tr>
+						<tr>
+							<th scope="row" class="powerstat-name">Eye Color</th>
+							<td>@hero.appearance.eyeColor</td>
+						</tr>
+						<tr>
+							<th scope="row" class="powerstat-name">Hair Color</th>
+							<td>@hero.appearance.hairColor</td>
+						</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			@*Card template*@
+			<div class="card shadow mb-5">
+				<h3 class="card-header fw-bold">Appearance</h3>
+				<div class="card-body">
+					<h5 class="card-title">Special title treatment</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 				</div>
 			</div>
 		</div>
-		@*Contains misc info*@
+		@*Right Column that contains Contains misc info*@
 		<div class="col-lg-2">
 			
 		</div>
@@ -93,12 +163,12 @@
 	[Inject]
 	public IHeroService HeroService { get; set; }
 
-	static string jsonData = System.IO.File.ReadAllText("wwwroot/sample-data/hero-sample.json");
+	static readonly string jsonData = System.IO.File.ReadAllText("wwwroot/sample-data/hero-sample.json");
 
 	private Hero hero { get; set; } = JsonSerializer.Deserialize<Hero>(jsonData);
 
 
-	TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+	readonly TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
 
 	//protected override async Task OnInitializedAsync() => await GetHeroDetails(heroName);
 

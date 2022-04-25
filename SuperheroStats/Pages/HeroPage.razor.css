@@ -28,7 +28,6 @@
     border-radius: 50%;
     width: 250px;
     height: 250px;
-
 }
 
 #hero-name {
@@ -37,12 +36,16 @@
 
 .powerstat-name {
     height: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
 }
 
 .powerstat-value {
     height: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .powerstat-progress {
     height: 1.5rem;
 }
+
