@@ -18,15 +18,7 @@
 				var propName = _stringFormatting.ToTitleCase(prop.Name);
 				var propValue = (int) (prop.GetValue(attributeName, null) ?? 0);
 							@*Change the color of the progress bar depending on the value of the powerstat*@
-				var progressColor = "";
-				if (propValue <= 25)
-					progressColor = "bg-danger";
-				else if (propValue <= 50)
-					progressColor = "bg-warning";
-				else if (propValue <= 75)
-					progressColor = "bg-info";
-				else
-					progressColor = "bg-primary";
+				var progressColor = SetProgressColor(propValue);
 				<tr>
 					<th scope="row" class="powerstat-name">@propName</th>
 					<td class="powerstat-value text-end">@propValue</td>
@@ -50,6 +42,19 @@
 
 	private readonly StringFormattingService _stringFormatting = new StringFormattingService();
 
-
+	public string SetProgressColor(int propValue)
+	{
+		switch (propValue)
+		{
+			case <= 25:
+				return "bg-danger";
+			case <= 50:
+				return "bg-warning";
+			case <= 75:
+				return "bg-info";
+			default:
+				return "bg-primary";
+		}
+	}
 
 }
