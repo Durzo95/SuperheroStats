@@ -33,7 +33,10 @@ else
 			</div>
 			<br/>
 			<h4>Affiliations</h4>
-
+			@if (colorIndex != 0)
+			{
+				colorIndex = 0;
+			}
 			@foreach (var aff in hero.connections.groupAffiliation.Split(", ").ToList())
 			{
 				if (colorIndex >= bootstrapColors.Count)
@@ -50,104 +53,13 @@ else
 		@*Middle columns Contains the cards with stats and info*@
 		<div class="col-lg">
 			@*Card to show power statistics *@
-			<div class="card shadow">
-				<div class="card-header">
-					<h3 class="fw-bold">Power Stats</h3>
-				</div>
-				<div class="card-body">
-					<table class="table table-borderless" id="hero-powerstats-table">
-						<tbody>
-						@*	Iterating through the properties of the Hero Powerstats object
-							https://www.codegrepper.com/code-examples/csharp/c%23+iterate+over+object+properties
-							Displaying the powerstat name*@
-						@foreach (PropertyInfo prop in hero.powerstats.GetType().GetProperties())
-						{
-							var propName = ti.ToTitleCase(prop.Name);
-							var propValue = (int) (prop.GetValue(hero.powerstats, null) ?? 0);
-							@*Change the color of the progress bar depending on the value of the powerstat*@
-							var progressColor = "";
-							if (propValue <= 25)
-								progressColor = "bg-danger";
-							else if (propValue <= 50)
-								progressColor = "bg-warning";
-							else if (propValue <= 75)
-								progressColor = "bg-info";
-							else
-								progressColor = "bg-primary";
-							<tr>
-								<th scope="row" class="powerstat-name">@propName</th>
-								<td class="powerstat-value text-end">@propValue</td>
-								@*the w-* class is used to make the progress bar the desired size in the table*@
-								<td class="powerstat-value w-75">
-									<div class="progress powerstat-progress mb-2">
-										<div class="progress-bar @progressColor" role="progressbar" style="width: @propValue%" aria-valuenow="@propValue" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</td>
-							</tr>
-						}
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<ProgressBarCard attributeName="@hero.powerstats"></ProgressBarCard>
 			@*Card to show appearance data *@
-			@*<BasicCardTable hero="hero"></BasicCardTable>*@
-
-			<div class="card shadow">
-				<h3 class="card-header fw-bold">Appearance</h3>
-				<div class="card-body">
-					<table class="table table-hover">
-						<tbody>
-						@foreach (PropertyInfo prop in hero.appearance.GetType().GetProperties())
-						{
-							var propName = ti.ToTitleCase(ToSentenceCase(prop.Name));
-							var propValue = DeliminateStringIfList(prop.GetValue(hero.appearance, null));
-							<tr>
-								<th class="powerstat-name">@propName</th>
-								<td class="powerstat-value  w-50">@propValue</td>
-							</tr>
-						}
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<BasicCardTable attributeName="@hero.appearance"></BasicCardTable>
 			@*Card to show biography data *@
-			<div class="card shadow">
-				<h3 class="card-header fw-bold">Biography</h3>
-				<div class="card-body">
-					<table class="table table-hover">
-						<tbody>
-						@foreach (PropertyInfo prop in hero.biography.GetType().GetProperties())
-						{
-							var propName = ti.ToTitleCase(ToSentenceCase(prop.Name));
-							var propValue = DeliminateStringIfList(prop.GetValue(hero.biography, null));
-							<tr>
-								<th class="powerstat-name">@propName</th>
-								<td class="powerstat-value  w-50">@propValue</td>
-							</tr>
-						}
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<BasicCardTable attributeName="@hero.biography"></BasicCardTable>
 			@*Card to show work data *@
-			<div class="card shadow">
-				<h3 class="card-header fw-bold">Work</h3>
-				<div class="card-body">
-					<table class="table table-hover">
-						<tbody>
-						@foreach (PropertyInfo prop in hero.work.GetType().GetProperties())
-						{
-							var propValue = DeliminateStringIfList(prop.GetValue(hero.work, null));
-							var propName = ti.ToTitleCase(ToSentenceCase(prop.Name));
-							<tr>
-								<th class="powerstat-name">@propName</th>
-								<td class="powerstat-value">@propValue</td>
-							</tr>
-						}
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<BasicCardTable attributeName="@hero.work"></BasicCardTable>
 
 		</div>
 	</div>
@@ -180,7 +92,7 @@ else
 	// The color index used to loop through the bootstrap colors when filling out the pills on the page
 	// It just looked bad when using random colors most of the time
 	// so sticking with looping through a good pallete instead
-	private int colorIndex = 0;
+	public int colorIndex = 0;
 
 	//protected override async Task OnInitializedAsync() => await GetHeroDetails(heroName);
 

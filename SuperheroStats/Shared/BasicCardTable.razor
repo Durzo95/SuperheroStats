@@ -1,5 +1,38 @@
-﻿<h3>BasicCardTable</h3>
+﻿@using System.Reflection
+@using System.Text.RegularExpressions
+@using SuperheroStats.Data
+@using System.Collections
+@using System.Globalization
+@using System.Runtime.CompilerServices
+@using SuperheroStats.Services
 
+
+
+<div class="card shadow">
+	<h3 class="card-header fw-bold">Appearance</h3>
+	<div class="card-body">
+		<table class="table table-hover">
+			<tbody>
+			@foreach (PropertyInfo prop in attributeName.GetType().GetProperties())
+			{
+				var propName = _stringFormatting.ToSentenceCase(prop.Name);
+				var propValue = _stringFormatting.DeliminateStringIfList(prop.GetValue(attributeName, null));
+				<tr>
+					<th class="powerstat-name">@propName</th>
+					<td class="powerstat-value  w-50">@propValue</td>
+				</tr>
+			}
+			</tbody>
+		</table>
+	</div>
+</div>
 @code {
+
+	[Parameter] 
+	public object attributeName { get; set; }
+
+	private readonly StringFormattingService _stringFormatting = new StringFormattingService();
+
+
 
 }
