@@ -24,7 +24,7 @@
 {
 	[Inject]
 	public IHeroService HeroService { get; set; }
-	private IEnumerable<Hero> heroes { get; set; }
+	private IEnumerable<HeroModel> heroes { get; set; }
 
 	private async Task GetHeroes()
 	{

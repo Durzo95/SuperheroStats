@@ -2,13 +2,13 @@
 
 namespace SuperheroStats.Services
 {
-	public class HeroService : IHeroService
+	public class _HeroService : _IHeroService
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger _logger;
         private readonly IConfiguration _config;
 
-        public HeroService(HttpClient httpClient, IConfiguration config)
+        public _HeroService(HttpClient httpClient, IConfiguration config)
         {
             _config = config;
             _httpClient = httpClient;

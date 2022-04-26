@@ -4,7 +4,7 @@ namespace SuperheroStats.Services
 {
 	public interface IHeroService
     {
-        Task<IEnumerable<Hero>> GetHeroes();
-        Task<Hero> GetHero(string name);
+        Task<IEnumerable<HeroModel>> GetHeroes();
+        Task<HeroModel> GetHero(string name);
     }
 }

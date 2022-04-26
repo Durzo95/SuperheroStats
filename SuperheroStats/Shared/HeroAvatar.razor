@@ -7,6 +7,7 @@
 	<img src="@hero.images.lg" class="shadow-lg mb-3 mx-auto d-block" id="hero-avatar" alt="@hero.name"/>
 	<div class="row text-center">
 		<h1 class="fw-bold" id="hero-name">@hero.name</h1>
+		@*Only show the biography name if they're different from the hero name*@
 		@if (hero.name != hero.biography.fullName)
 		{
 			<h2>@hero.biography.fullName</h2>
@@ -16,5 +17,5 @@
 
 @code {
 	[Parameter]
-	public Hero hero { get; set; }
+	public HeroModel hero { get; set; }
 }

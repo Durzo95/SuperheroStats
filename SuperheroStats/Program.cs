@@ -9,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+//builder.Services.AddHttpClient<_IHeroService, _HeroService>(client =>
+//{
+//    client.BaseAddress = new Uri("https://superhero-search.p.rapidapi.com/api/");
+//});
 builder.Services.AddHttpClient<IHeroService, HeroService>(client =>
 {
     client.BaseAddress = new Uri("https://superhero-search.p.rapidapi.com/api/");
