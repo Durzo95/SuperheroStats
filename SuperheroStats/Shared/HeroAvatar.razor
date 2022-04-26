@@ -7,7 +7,10 @@
 	<img src="@hero.images.lg" class="shadow-lg mb-3 mx-auto d-block" id="hero-avatar" alt="@hero.name"/>
 	<div class="row text-center">
 		<h1 class="fw-bold" id="hero-name">@hero.name</h1>
-		<h2>@hero.biography.fullName</h2>
+		@if (hero.name != hero.biography.fullName)
+		{
+			<h2>@hero.biography.fullName</h2>
+		}
 	</div>
 </div>
 
