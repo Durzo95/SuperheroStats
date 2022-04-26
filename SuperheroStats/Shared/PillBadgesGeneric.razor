@@ -1,0 +1,26 @@
+﻿@*This is needed here because without it, if the user refreshes the page then the color scheme changes*@
+@if (colorIndex != 0)
+{
+	colorIndex = 0;
+}
+@foreach (var aff in listValue.Split(", ").ToList())
+{
+	if (colorIndex >= bootstrapColors.Count)
+	{
+		colorIndex = 0;
+	}
+	<span class="badge rounded-pill hero-pill @bootstrapColors[colorIndex]">@aff</span>
+	colorIndex++;
+}
+@code {
+	[Parameter] 
+	public string listValue { get; set; }
+
+	// The color index used to loop through the bootstrap colors when filling out the pills on the page
+	// It just looked bad when using random colors most of the time
+	// so sticking with looping through a good pallete instead
+	public int colorIndex = 0;
+
+	private readonly List<string> bootstrapColors = new List<string>{"bg-primary", "bg-danger", 
+		"bg-warning text-dark", "bg-info text-dark"};
+}

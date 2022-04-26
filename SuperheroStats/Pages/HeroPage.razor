@@ -21,32 +21,10 @@ else
 
 		@*Left column with Character picture and name*@
 		<div class="col-lg-4">
-			<div class="row-fluid" id="hero-avatar-container">
-				@*Image by default is displayed as inline-block, 
-				you need to display it as block in order to center it with .mx-auto. 
-				This can be done with built-in .d-block*@
-				<img src="@hero.images.lg" class="shadow-lg mb-3 mx-auto d-block" id="hero-avatar" alt="@hero.name"/>
-				<div class="row text-center">
-					<h1 class="fw-bold" id="hero-name">@hero.name</h1>
-					<h2>@hero.biography.fullName</h2>
-				</div>
-			</div>
+			<HeroAvatar hero="hero"></HeroAvatar>
 			<br/>
 			<h4>Affiliations</h4>
-			@if (colorIndex != 0)
-			{
-				colorIndex = 0;
-			}
-			@foreach (var aff in hero.connections.groupAffiliation.Split(", ").ToList())
-			{
-				if (colorIndex >= bootstrapColors.Count)
-				{
-					colorIndex = 0;
-				}
-				<span class="badge rounded-pill hero-pill @bootstrapColors[colorIndex]">@aff</span>
-				colorIndex++;
-			}
-
+			<PillBadgesGeneric listValue="@hero.connections.groupAffiliation"></PillBadgesGeneric>
 			<br/>
 		</div>
 
@@ -80,18 +58,13 @@ else
 
 	private static Hero? hero = null;
 
-
 	protected override async Task OnInitializedAsync()
 	{
 		hero = await HeroService.GetHero(heroName);
 	}
 
-	private readonly List<string> bootstrapColors = new List<string>{"bg-primary", "bg-danger", 
-															"bg-warning text-dark", "bg-info text-dark"};
+	
 
-	// The color index used to loop through the bootstrap colors when filling out the pills on the page
-	// It just looked bad when using random colors most of the time
-	// so sticking with looping through a good pallete instead
-	public int colorIndex = 0;
+	
 
 }

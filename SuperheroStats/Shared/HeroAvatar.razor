@@ -1,0 +1,17 @@
+﻿@using SuperheroStats.Data
+@using Microsoft.AspNetCore.SignalR
+<div class="row-fluid" id="hero-avatar-container">
+	@*Image by default is displayed as inline-block, 
+				you need to display it as block in order to center it with .mx-auto. 
+				This can be done with built-in .d-block*@
+	<img src="@hero.images.lg" class="shadow-lg mb-3 mx-auto d-block" id="hero-avatar" alt="@hero.name"/>
+	<div class="row text-center">
+		<h1 class="fw-bold" id="hero-name">@hero.name</h1>
+		<h2>@hero.biography.fullName</h2>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public Hero hero { get; set; }
+}
