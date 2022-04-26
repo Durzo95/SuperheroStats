@@ -2,43 +2,49 @@
 @using SuperheroStats.Services
 
 
-
-<div class="card shadow">
-	<div class="card-header">
-		<h3 class="fw-bold">Power Stats</h3>
+@if (AttributeName == null)
+{
+	<h1>Invalid Attribute Name...</h1>
+}
+else
+{
+	<div class="card shadow">
+		<div class="card-header">
+			<h3 class="fw-bold">Power Stats</h3>
+		</div>
+		<div class="card-body">
+			<table class="table table-borderless" id="hero-powerstats-table">
+				<tbody>
+				@*	Iterating through the properties of the Hero Powerstats object
+								https://www.codegrepper.com/code-examples/csharp/c%23+iterate+over+object+properties
+								Displaying the powerstat name*@
+				@foreach (PropertyInfo prop in AttributeName.GetType().GetProperties())
+				{
+					var propName = _stringFormatting.ToTitleCase(prop.Name);
+					var propValue = (int) (prop.GetValue(AttributeName, null) ?? 0);
+								@*Change the color of the progress bar depending on the value of the powerstat*@
+					var progressColor = SetProgressColor(propValue);
+					<tr>
+						<th scope="row" class="powerstat-name">@propName</th>
+						<td class="powerstat-value text-end">@propValue</td>
+						@*the w-* class is used to make the progress bar the desired size in the table*@
+						<td class="powerstat-value w-75">
+							<div class="progress powerstat-progress mb-2">
+								<div class="progress-bar @progressColor" role="progressbar" style="width: @propValue%" aria-valuenow="@propValue" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</td>
+					</tr>
+				}
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div class="card-body">
-		<table class="table table-borderless" id="hero-powerstats-table">
-			<tbody>
-			@*	Iterating through the properties of the Hero Powerstats object
-							https://www.codegrepper.com/code-examples/csharp/c%23+iterate+over+object+properties
-							Displaying the powerstat name*@
-			@foreach (PropertyInfo prop in attributeName.GetType().GetProperties())
-			{
-				var propName = _stringFormatting.ToTitleCase(prop.Name);
-				var propValue = (int) (prop.GetValue(attributeName, null) ?? 0);
-							@*Change the color of the progress bar depending on the value of the powerstat*@
-				var progressColor = SetProgressColor(propValue);
-				<tr>
-					<th scope="row" class="powerstat-name">@propName</th>
-					<td class="powerstat-value text-end">@propValue</td>
-					@*the w-* class is used to make the progress bar the desired size in the table*@
-					<td class="powerstat-value w-75">
-						<div class="progress powerstat-progress mb-2">
-							<div class="progress-bar @progressColor" role="progressbar" style="width: @propValue%" aria-valuenow="@propValue" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</td>
-				</tr>
-			}
-			</tbody>
-		</table>
-	</div>
-</div>
+}
 
 @code {
 
 	[Parameter] 
-	public object attributeName { get; set; }
+	public object? AttributeName { get; set; }
 
 	private readonly StringFormattingService _stringFormatting = new StringFormattingService();
 
