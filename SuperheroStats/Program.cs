@@ -12,6 +12,7 @@ builder.Services.AddHttpClient<IHeroService, HeroService>(client =>
 {
     client.BaseAddress = new Uri("https://superhero-search.p.rapidapi.com/api/");
 });
+builder.Services.AddMemoryCache();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

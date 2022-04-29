@@ -18,31 +18,30 @@ else
 {
 	<PageTitle>@hero.name</PageTitle>
 	<div class="container">
-	<div class="row">
+		<div class="row">
+			@*Left column with Character picture and name*@
+			<div class="col-lg-4">
+				<HeroAvatar hero="hero"></HeroAvatar>
+				<br/>
+				<h4>Affiliations</h4>
+				<PillBadgesGeneric listValue="@hero.connections.groupAffiliation"></PillBadgesGeneric>
+				<br/>
+			</div>
 
-		@*Left column with Character picture and name*@
-		<div class="col-lg-4">
-			<HeroAvatar hero="hero"></HeroAvatar>
-			<br/>
-			<h4>Affiliations</h4>
-			<PillBadgesGeneric listValue="@hero.connections.groupAffiliation"></PillBadgesGeneric>
-			<br/>
-		</div>
+			@*Middle columns Contains the cards with stats and info*@
+			<div class="col-lg">
+				@*Card to show power statistics *@
+				<ProgressBarCard AttributeName="@hero.powerstats"></ProgressBarCard>
+				@*Card to show appearance data *@
+				<BasicCardTable AttributeName="@hero.appearance"></BasicCardTable>
+				@*Card to show biography data *@
+				<BasicCardTable AttributeName="@hero.biography"></BasicCardTable>
+				@*Card to show work data *@
+				<BasicCardTable AttributeName="@hero.work"></BasicCardTable>
 
-		@*Middle columns Contains the cards with stats and info*@
-		<div class="col-lg">
-			@*Card to show power statistics *@
-			<ProgressBarCard AttributeName="@hero.powerstats"></ProgressBarCard>
-			@*Card to show appearance data *@
-			<BasicCardTable AttributeName="@hero.appearance"></BasicCardTable>
-			@*Card to show biography data *@
-			<BasicCardTable AttributeName="@hero.biography"></BasicCardTable>
-			@*Card to show work data *@
-			<BasicCardTable AttributeName="@hero.work"></BasicCardTable>
-
+			</div>
 		</div>
 	</div>
-</div>
 
 }
 
@@ -61,7 +60,7 @@ else
 
 	protected override async Task OnInitializedAsync()
 	{
-		hero = await HeroService.GetHero(heroName);
+		hero = await HeroService.GetHeroCache(heroName);
 	}
 
 	
