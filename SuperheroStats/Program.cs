@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using SuperheroStats.Data;
 using SuperheroStats.Services;
 
 var builder = WebApplication.CreateBuilder(args);
