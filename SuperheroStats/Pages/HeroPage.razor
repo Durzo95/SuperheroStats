@@ -54,8 +54,6 @@ else
 	[Inject]
 	public IHeroService? HeroService { get; set; }
 
-	readonly TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
-
 	private static HeroModel? hero = null;
 
 	protected override async Task OnInitializedAsync()
