@@ -3,7 +3,7 @@
     Gives a vignette feel where the image is darkened around the borders
     Makes the test more visible
 */
-    box-shadow: inset 0px 0px 150px black;
+    box-shadow: inset 0px 0px 100px black;
 }
 
 .hero-image {
@@ -20,4 +20,13 @@
 /* The Transformation */
 .img-hover-zoom--zoom-n-rotate:hover img {
     transform: scale(1.2);
+}
+
+@media (max-width: 576px) {
+    .card-title {
+        font-size: 1rem;
+    }
+    .card-text {
+        font-size: 0.9rem;
+    }
 }
