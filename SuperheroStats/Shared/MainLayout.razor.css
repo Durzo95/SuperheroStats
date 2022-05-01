@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     background-color: #fafbfe;
+    /* This allows the offwhite color to cover the whole viewport of the page, below the top-bar */
+    height: 100vh;
 }
 
 main {
