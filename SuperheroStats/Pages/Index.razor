@@ -2,12 +2,10 @@
 @using SuperheroStats.Services
 @using SuperheroStats.Data
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Heroes</PageTitle>
 
 <h1>Super Hero Stats</h1>
 <button class="btn btn-primary mb-3" @onclick="GetHeroes">Get 20 Random Heroes</button>
-
-
 
 <div class="row row-cols-2 row-cols-md-4 g-4 hero-card-container">
 	@if (heroes != null)
@@ -19,6 +17,9 @@
 	}
 
 </div>
+
+@*Add to footer when it's created*@
+@*<a href="https://www.flaticon.com/free-icons/superhero" title="superhero icons">Superhero icons created by Freepik - Flaticon</a>*@
 
 @code
 {
