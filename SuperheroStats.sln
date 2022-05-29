@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperheroStats", "SuperheroStats\SuperheroStats.csproj", "{1E83DD66-B2F6-4CE9-B0CB-5BF1EC05CC4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLibrary", "DataAccessLibrary\DataAccessLibrary.csproj", "{BDDD06E3-C8BF-457F-90E2-26574F944535}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLibrary", "DataAccessLibrary\DataAccessLibrary.csproj", "{BDDD06E3-C8BF-457F-90E2-26574F944535}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

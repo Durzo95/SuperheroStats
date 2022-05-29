@@ -4,7 +4,9 @@
     flex-direction: column;
     background-color: #fafbfe;
     /* This allows the offwhite color to cover the whole viewport of the page, below the top-bar */
-    height: 100vh;
+    min-height: 100vh;
+    /* Padding so that the footer does not overlap with the content on the main page */
+    padding-bottom: 22rem;
 }
 
 main {
