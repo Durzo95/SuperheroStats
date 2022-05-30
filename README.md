@@ -39,17 +39,15 @@ The purpose of this site was to solidy the learning of:
 
 [Link to Homepage](https://superherostats20220429010340.azurewebsites.net/)
 
-### Quick Links to Heroes
-[Batman, Terry McGinnis](https://superherostats20220429010340.azurewebsites.net/hero/Batman)
+#### Quick Links to Heroes
+- [Batman, Terry McGinnis](https://superherostats20220429010340.azurewebsites.net/hero/Batman)
+- [Spider-Man](https://superherostats20220429010340.azurewebsites.net/hero/Spider%20Man)
+- [Robin](https://superherostats20220429010340.azurewebsites.net/hero/Robin)
 
-[Spider-Man](https://superherostats20220429010340.azurewebsites.net/hero/Spider%20Man)
-
-[Robin](https://superherostats20220429010340.azurewebsites.net/hero/Robin)
-
-### Homepage
+#### Homepage
 ![Homepage](https://github.com/Durzo95/SuperheroStats/blob/master/SuperheroStats/wwwroot/images/Homepage.png?raw=true)
 
-### Hero Stats Page
+#### Hero Stats Page
 ![Hero Page](https://github.com/Durzo95/SuperheroStats/blob/master/SuperheroStats/wwwroot/images/HeroPage.png?raw=true)
 ## Tech Stack
 
