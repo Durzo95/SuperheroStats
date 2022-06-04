@@ -37,12 +37,12 @@ The purpose of this site was to solidy the learning of:
 
 ## Demo
 
-[Link to Homepage](https://superherostats20220429010340.azurewebsites.net/)
+[Link to Homepage](https://hero-stats-durzo95.herokuapp.com/)
 
 #### Quick Links to Heroes
-- [Batman, Terry McGinnis](https://superherostats20220429010340.azurewebsites.net/hero/Batman)
-- [Spider-Man](https://superherostats20220429010340.azurewebsites.net/hero/Spider%20Man)
-- [Robin](https://superherostats20220429010340.azurewebsites.net/hero/Robin)
+- [Batman, Terry McGinnis](https://hero-stats-durzo95.herokuapp.com//hero/Batman)
+- [Spider-Man](https://hero-stats-durzo95.herokuapp.com//hero/Spider%20Man)
+- [Robin](https://hero-stats-durzo95.herokuapp.com//hero/Robin)
 
 #### Homepage
 ![Homepage](https://github.com/Durzo95/SuperheroStats/blob/master/SuperheroStats/wwwroot/images/Homepage.png?raw=true)
