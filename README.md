@@ -40,9 +40,9 @@ The purpose of this site was to solidy the learning of:
 [Link to Homepage](https://herostats.jerryguerrero.com/)
 
 #### Quick Links to Heroes
-- [Batman, Terry McGinnis](https://hero-stats-durzo95.herokuapp.com//hero/Batman)
-- [Spider-Man](https://hero-stats-durzo95.herokuapp.com//hero/Spider%20Man)
-- [Robin](https://hero-stats-durzo95.herokuapp.com//hero/Robin)
+- [Batman, Terry McGinnis](https://herostats.jerryguerrero.com.com//hero/Batman)
+- [Spider-Man](https://herostats.jerryguerrero.com//hero/Spider%20Man)
+- [Robin](https://herostats.jerryguerrero.com//hero/Robin)
 
 #### Homepage
 ![Homepage](https://github.com/Durzo95/SuperheroStats/blob/master/SuperheroStats/wwwroot/images/Homepage.png?raw=true)
