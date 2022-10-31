@@ -19,7 +19,6 @@ The purpose of this site was to solidy the learning of:
   * [Table of Contents](#table-of-contents)
   * [Author](#author)
   * [Demo](#demo)
-    + [Quick Links to Heroes](#quick-links-to-heroes)
     + [Homepage](#homepage)
     + [Hero Stats Page](#hero-stats-page)
   * [Tech Stack](#tech-stack)
@@ -38,11 +37,6 @@ The purpose of this site was to solidy the learning of:
 ## Demo
 
 [Link to Homepage](https://herostats.jerryguerrero.com/)
-
-#### Quick Links to Heroes
-- [Batman, Terry McGinnis](https://herostats.jerryguerrero.com.com//hero/Batman)
-- [Spider-Man](https://herostats.jerryguerrero.com//hero/Spider%20Man)
-- [Robin](https://herostats.jerryguerrero.com//hero/Robin)
 
 #### Homepage
 ![Homepage](https://github.com/Durzo95/SuperheroStats/blob/master/SuperheroStats/wwwroot/images/Homepage.png?raw=true)
