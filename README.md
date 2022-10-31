@@ -5,7 +5,7 @@
 
 # Hero Stats
 
-A simple website that displays 20 random heroe's and their information. 
+A simple website that displays 20 random heroes and their information. 
 
 The purpose of this site was to solidy the learning of:
 
