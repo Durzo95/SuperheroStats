@@ -37,7 +37,7 @@ The purpose of this site was to solidy the learning of:
 
 ## Demo
 
-[Link to Homepage](https://hero-stats-durzo95.herokuapp.com/)
+[Link to Homepage](https://herostats.jerryguerrero.com/)
 
 #### Quick Links to Heroes
 - [Batman, Terry McGinnis](https://hero-stats-durzo95.herokuapp.com//hero/Batman)
